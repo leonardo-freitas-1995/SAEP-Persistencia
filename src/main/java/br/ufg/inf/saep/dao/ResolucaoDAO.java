@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class ResolucaoDAO implements ResolucaoRepository {
 	private static ResolucaoDAO instance = new ResolucaoDAO();
 	private MongoDatabase db = DBConnection.getConnection().getDatabase();
-	private MongoCollection<Document> resolucaoCollection = db.getCollection("resoluc");
+	private MongoCollection<Document> resolucaoCollection = db.getCollection("resolucoes");
 	private MongoCollection<Document> tipoCollection = db.getCollection("tipos");
 	private MongoDocumentSerializer mds = new MongoDocumentSerializer();
 
@@ -68,7 +68,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		tipoCollection.insertOne(mds.toDocument(tipo, "Tipo"));
 	}
 
-	public void removeTipo(String codigo) {
+	public void removeTipo(String codigo) throws ResolucaoUsaTipoException {
 		Document query = new Document("regras.tipoRelato", codigo);
 		long findings = resolucaoCollection.count(query);
 		if (findings > 0){
@@ -87,8 +87,8 @@ public class ResolucaoDAO implements ResolucaoRepository {
 
 	public List<Tipo> tiposPeloNome(String nome) {
 		ArrayList<Tipo> tipos = new ArrayList<Tipo>();
-		Document query = new Document("id", Pattern.compile(nome));
-		FindIterable<Document> search = resolucaoCollection.find(query);
+		Document query = new Document("nome", Pattern.compile(nome));
+		FindIterable<Document> search = tipoCollection.find(query);
 		for (Document tipoDocument : search){
 			tipos.add(mds.fromDocument(tipoDocument, Tipo.class));
 		}
