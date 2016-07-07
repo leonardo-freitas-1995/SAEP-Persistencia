@@ -19,8 +19,8 @@ import java.util.regex.Pattern;
 public class ResolucaoDAO implements ResolucaoRepository {
 	private static ResolucaoDAO instance = new ResolucaoDAO();
 	private MongoDatabase db = DBConnection.getConnection().getDatabase();
-	private MongoCollection<Document> resolucaoCollection = db.getCollection("resolucao");
-	private MongoCollection<Document> tipoCollection = db.getCollection("tipo");
+	private MongoCollection<Document> resolucaoCollection = db.getCollection("resolucoes");
+	private MongoCollection<Document> tipoCollection = db.getCollection("tipos");
 	private Gson gson = new Gson();
 
 	public static ResolucaoDAO getInstance() {

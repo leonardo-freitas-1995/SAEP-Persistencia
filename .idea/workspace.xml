@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4fcc7ebc-8b9d-46e8-a42e-cb812e5881ee" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/db/DBConnection.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_kyriosdata_saep_saep_dominio_1_0_0.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/RadocDAO.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SAEP-Persistencia.iml" afterPath="$PROJECT_DIR$/SAEP-Persistencia.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java" />
     </list>
     <ignored path="SAEP-Persistencia.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,18 +38,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResolucaoDAO.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ResolucaoDAO.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-77">
-              <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+            <state relative-caret-position="170">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="55" selection-end-column="81" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1956#1964#0" expanded="true" />
-                <element signature="e#2165#2166#0" expanded="true" />
-                <element signature="e#2238#2239#0" expanded="true" />
-                <element signature="e#2877#2883#0" expanded="true" />
+                <element signature="e#1958#1966#0" expanded="true" />
+                <element signature="e#2167#2168#0" expanded="true" />
+                <element signature="e#2240#2241#0" expanded="true" />
+                <element signature="e#2879#2885#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RadocDAO.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/RadocDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Radoc.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/github/kyriosdata/saep/saep-dominio/1.0.3/saep-dominio-1.0.3-sources.jar!/br/ufg/inf/es/saep/sandbox/dominio/Radoc.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,8 +101,9 @@
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/db/DBConnection.java" />
         <option value="$MAVEN_REPOSITORY$/com/github/kyriosdata/saep/saep-dominio/1.0.0/saep-dominio-1.0.0.jar!/br/ufg/inf/es/saep/sandbox/dominio/ParecerRepository.class" />
         <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ParecerDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/RadocDAO.java" />
       </list>
     </option>
   </component>
@@ -757,12 +775,20 @@
       <option name="presentableId" value="Default" />
       <updated>1467843247453</updated>
       <workItem from="1467843249233" duration="316000" />
-      <workItem from="1467844131800" duration="11590000" />
+      <workItem from="1467844131800" duration="13140000" />
     </task>
+    <task id="LOCAL-00001" summary="Implementando DAO para resolução">
+      <created>1467864466404</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1467864466404</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11906000" />
+    <option name="totallyTimeSpent" value="13456000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -806,6 +832,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implementando DAO para resolução" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementando DAO para resolução" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -989,8 +1019,8 @@
         <state relative-caret-position="263">
           <caret line="134" column="29" selection-start-line="134" selection-start-column="19" selection-end-line="134" selection-end-column="29" />
           <folding>
-            <element signature="e#4678#4679#0" expanded="true" />
-            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4678#4679#0" expanded="false" />
+            <element signature="e#4705#4706#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1003,16 +1033,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/kyriosdata/saep/saep-dominio/1.0.3/saep-dominio-1.0.3.jar!/br/ufg/inf/es/saep/sandbox/dominio/Radoc.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-53">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/kyriosdata/saep/saep-dominio/1.0.3/saep-dominio-1.0.3-sources.jar!/br/ufg/inf/es/saep/sandbox/dominio/Radoc.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-77">
-          <caret line="73" column="5" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+        <state relative-caret-position="170">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="55" selection-end-column="81" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1956#1964#0" expanded="true" />
-            <element signature="e#2165#2166#0" expanded="true" />
-            <element signature="e#2238#2239#0" expanded="true" />
-            <element signature="e#2877#2883#0" expanded="true" />
+            <element signature="e#1958#1966#0" expanded="true" />
+            <element signature="e#2167#2168#0" expanded="true" />
+            <element signature="e#2240#2241#0" expanded="true" />
+            <element signature="e#2879#2885#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/RadocDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
