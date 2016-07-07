@@ -2,26 +2,23 @@ package br.ufg.inf.saep.dao;
 
 import br.ufg.inf.es.saep.sandbox.dominio.*;
 import br.ufg.inf.saep.db.DBConnection;
-import com.google.gson.Gson;
+import br.ufg.inf.saep.tools.MongoDocumentSerializer;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.util.JSON;
 import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * Created by Leonardo on 06/07/2016.
- */
+
 public class ResolucaoDAO implements ResolucaoRepository {
 	private static ResolucaoDAO instance = new ResolucaoDAO();
 	private MongoDatabase db = DBConnection.getConnection().getDatabase();
-	private MongoCollection<Document> resolucaoCollection = db.getCollection("resolucoes");
+	private MongoCollection<Document> resolucaoCollection = db.getCollection("resoluc");
 	private MongoCollection<Document> tipoCollection = db.getCollection("tipos");
-	private Gson gson = new Gson();
+	private MongoDocumentSerializer mds = new MongoDocumentSerializer();
 
 	public static ResolucaoDAO getInstance() {
 		return instance;
@@ -35,7 +32,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		Document resolucaoDocument = resolucaoCollection.find(query).first();
 		if (resolucaoDocument == null)
 			return null;
-		return gson.fromJson(resolucaoDocument.toJson(), Resolucao.class);
+		return mds.fromDocument(resolucaoDocument, Resolucao.class);
 	}
 
 	public String persiste(Resolucao resolucao) {
@@ -47,17 +44,15 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		if (resolucaoDocument != null)
 			return null;
 
-		resolucaoCollection.insertOne((Document) JSON.parse(gson.toJson(resolucao)));
+		resolucaoCollection.insertOne(mds.toDocument(resolucao, "Resolucao"));
 		return resolucao.getId();
 	}
 
 	public boolean remove(String identificador) {
 		Document query = new Document("id", identificador);
 		Document resolucaoDocument = resolucaoCollection.findOneAndDelete(query);
-		if (resolucaoDocument == null)
-			return false;
+		return resolucaoDocument != null;
 
-		return true;
 	}
 
 	public List<String> resolucoes() {
@@ -70,7 +65,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 	}
 
 	public void persisteTipo(Tipo tipo) {
-		tipoCollection.insertOne((Document) JSON.parse(gson.toJson(tipo)));
+		tipoCollection.insertOne(mds.toDocument(tipo, "Tipo"));
 	}
 
 	public void removeTipo(String codigo) {
@@ -87,7 +82,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		Document tipoDocument = tipoCollection.find(query).first();
 		if (tipoDocument == null)
 			return null;
-		return gson.fromJson(tipoDocument.toJson(), Tipo.class);
+		return mds.fromDocument(tipoDocument, Tipo.class);
 	}
 
 	public List<Tipo> tiposPeloNome(String nome) {
@@ -95,7 +90,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		Document query = new Document("id", Pattern.compile(nome));
 		FindIterable<Document> search = resolucaoCollection.find(query);
 		for (Document tipoDocument : search){
-			tipos.add(gson.fromJson(tipoDocument.toJson(), Tipo.class));
+			tipos.add(mds.fromDocument(tipoDocument, Tipo.class));
 		}
 		return tipos;
 	}

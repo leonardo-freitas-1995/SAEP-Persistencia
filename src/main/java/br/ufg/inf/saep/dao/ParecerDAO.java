@@ -2,23 +2,20 @@ package br.ufg.inf.saep.dao;
 
 import br.ufg.inf.es.saep.sandbox.dominio.*;
 import br.ufg.inf.saep.db.DBConnection;
-import com.google.gson.Gson;
+import br.ufg.inf.saep.tools.MongoDocumentSerializer;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.util.JSON;
 import org.bson.Document;
 
 import java.util.ArrayList;
 
-/**
- * Created by Leonardo on 07/07/2016.
- */
+
 public class ParecerDAO implements ParecerRepository {
 	private static ParecerDAO instance = new ParecerDAO();
 	private MongoDatabase db = DBConnection.getConnection().getDatabase();
 	private MongoCollection<Document> radocCollection = db.getCollection("radocs");
 	private MongoCollection<Document> parecerCollection = db.getCollection("pareceres");
-	private Gson gson = new Gson();
+	private MongoDocumentSerializer mds = new MongoDocumentSerializer();
 
 	public static ParecerDAO getInstance() {
 		return instance;
@@ -29,7 +26,7 @@ public class ParecerDAO implements ParecerRepository {
 
 	public void adicionaNota(String id, Nota nota) {
 		Document query = new Document("id", id);
-		Document update = new Document("$push", new Document("notas", JSON.parse(gson.toJson(nota))));
+		Document update = new Document("$push", new Document("notas", mds.toDocument(nota, "Nota")));
 		Document originalDoc = parecerCollection.findOneAndUpdate(query, update);
 		if (originalDoc == null){
 			throw new IdentificadorDesconhecido(id);
@@ -38,17 +35,18 @@ public class ParecerDAO implements ParecerRepository {
 
 	public void removeNota(String id, Avaliavel original) {
 		Document query = new Document("id", id);
-		String avaliavelJSON = gson.toJson(original);
+		Document avaliavelJSON = mds.toDocument(original, "Avaliavel");
 		ArrayList<Nota> newNotas = new ArrayList<Nota>();
 		Document parecerDocument = parecerCollection.find(query).first();
 		ArrayList<Document> notasDocument = (ArrayList<Document>) parecerDocument.get("notas");
 		for (Document notaDoc : notasDocument){
-			Nota nota = gson.fromJson(notaDoc.toJson(), Nota.class);
-			if (!gson.toJson(nota.getItemOriginal()).equals(avaliavelJSON)){
+			Nota nota = mds.fromDocument(notaDoc, Nota.class);
+			Document originalJSON = mds.toDocument(nota.getItemOriginal(), "Avaliavel");
+			if (!originalJSON.toJson().equals(avaliavelJSON.toJson())){
 				newNotas.add(nota);
 			}
 		}
-		Document newNotasDocument = new Document("notas", JSON.parse(gson.toJson(newNotas)));
+		Document newNotasDocument = new Document("notas", mds.toDocument(newNotas, "Nota"));
 		parecerCollection.updateOne(query, new Document("$set", newNotasDocument));
 	}
 
@@ -57,7 +55,7 @@ public class ParecerDAO implements ParecerRepository {
 		if (findings > 0){
 			throw new IdentificadorExistente("id");
 		}
-		parecerCollection.insertOne((Document) JSON.parse(gson.toJson(parecer)));
+		parecerCollection.insertOne(mds.toDocument(parecer, "Parecer"));
 	}
 
 	public void atualizaFundamentacao(String parecer, String fundamentacao) {
@@ -75,7 +73,7 @@ public class ParecerDAO implements ParecerRepository {
 		if (parecerDocument == null)
 			return null;
 
-		return gson.fromJson(parecerDocument.toJson(), Parecer.class);
+		return mds.fromDocument(parecerDocument, Parecer.class);
 	}
 
 	public void removeParecer(String id) {
@@ -87,7 +85,7 @@ public class ParecerDAO implements ParecerRepository {
 		Document resolucaoDocument = radocCollection.find(query).first();
 		if (resolucaoDocument == null)
 			return null;
-		return gson.fromJson(resolucaoDocument.toJson(), Radoc.class);
+		return mds.fromDocument(resolucaoDocument, Radoc.class);
 	}
 
 	public String persisteRadoc(Radoc radoc) {
@@ -97,7 +95,7 @@ public class ParecerDAO implements ParecerRepository {
 			throw new IdentificadorExistente("id");
 		}
 
-		radocCollection.insertOne((Document) JSON.parse(gson.toJson(radoc)));
+		radocCollection.insertOne(mds.toDocument(radoc, "Radoc"));
 		return radoc.getId();
 	}
 
