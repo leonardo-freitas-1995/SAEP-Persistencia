@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4fcc7ebc-8b9d-46e8-a42e-cb812e5881ee" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ParecerDAO.java" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ParecerDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ResolucaoDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/tools/MongoDocumentSerializer.java" afterPath="$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/tools/MongoDocumentSerializer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/TestSuite.java" afterPath="$PROJECT_DIR$/src/test/java/TestSuite.java" />
     </list>
     <ignored path="SAEP-Persistencia.iws" />
@@ -33,8 +30,8 @@
       <file leaf-file-name="TestSuite.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/TestSuite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="297" column="61" selection-start-line="297" selection-start-column="61" selection-end-line="297" selection-end-column="61" />
+            <state relative-caret-position="145">
+              <caret line="318" column="21" selection-start-line="318" selection-start-column="21" selection-end-line="318" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#734#741#0" expanded="true" />
@@ -45,44 +42,6 @@
                 <element signature="e#7373#7384#0" expanded="true" />
                 <element signature="e#7568#7574#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParecerDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/dao/ParecerDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="76" column="31" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="31" />
-              <folding>
-                <element signature="e#2952#2953#0" expanded="true" />
-                <element signature="e#3010#3011#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MongoDocumentSerializer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/ufg/inf/saep/tools/MongoDocumentSerializer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="105" column="5" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#815#825#0" expanded="true" />
-                <element signature="e#3515#3526#0" expanded="true" />
-                <element signature="e#3774#3780#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Radoc.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/github/kyriosdata/saep/saep-dominio/1.0.3/saep-dominio-1.0.3-sources.jar!/br/ufg/inf/es/saep/sandbox/dominio/Radoc.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -921,7 +880,7 @@
       <option name="presentableId" value="Default" />
       <updated>1467843247453</updated>
       <workItem from="1467843249233" duration="316000" />
-      <workItem from="1467844131800" duration="48775000" />
+      <workItem from="1467844131800" duration="48812000" />
     </task>
     <task id="LOCAL-00001" summary="Implementando DAO para resolução">
       <created>1467864466404</created>
@@ -972,15 +931,22 @@
       <option name="project" value="LOCAL" />
       <updated>1467922718013</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Criando a Suite de testes para ParecerDAO e realizando ajustes nas classes DAO">
+      <created>1467941870473</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1467941870473</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49091000" />
+    <option name="totallyTimeSpent" value="49128000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -990,7 +956,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27168575" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27168575" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1029,7 +995,8 @@
     <MESSAGE value="Implementando MongoDocumentSerializer e aplicando em DAOs" />
     <MESSAGE value="Realizando correções no ResolucaoDAO" />
     <MESSAGE value="Criando a Suite de testes para ResolucaoDAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Criando a Suite de testes para ResolucaoDAO" />
+    <MESSAGE value="Criando a Suite de testes para ParecerDAO e realizando ajustes nas classes DAO" />
+    <option name="LAST_COMMIT_MESSAGE" value="Criando a Suite de testes para ParecerDAO e realizando ajustes nas classes DAO" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1471,8 +1438,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/TestSuite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="297" column="61" selection-start-line="297" selection-start-column="61" selection-end-line="297" selection-end-column="61" />
+        <state relative-caret-position="145">
+          <caret line="318" column="21" selection-start-line="318" selection-start-column="21" selection-end-line="318" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#734#741#0" expanded="true" />

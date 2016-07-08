@@ -311,10 +311,10 @@ public class TestSuite {
 		System.out.println("Antes de inicar cada teste, é preciso apertar enter, deste modo, é possível pausar entre cada teste e verificar o estado do banco (Usando MongoShell, Robomongo, etc)");
 		db.drop();
 		System.out.println("Drop na database realizado. Host: localhost:27017 - Banco: saep");
-//		persisteResolucao();
-//		buscaResolucao();
-//		removeResolucao();
-//		manipulaTipos();
+		persisteResolucao();
+		buscaResolucao();
+		removeResolucao();
+		manipulaTipos();
 		insereRadoc();
 		buscaRadoc();
 		deletaRadoc();
