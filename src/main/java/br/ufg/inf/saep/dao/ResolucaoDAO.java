@@ -68,7 +68,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		tipoCollection.insertOne(mds.toDocument(tipo, "Tipo"));
 	}
 
-	public void removeTipo(String codigo) throws ResolucaoUsaTipoException {
+	public void removeTipo(String codigo) {
 		Document query = new Document("regras.tipoRelato", codigo);
 		long findings = resolucaoCollection.count(query);
 		if (findings > 0){
@@ -87,9 +87,10 @@ public class ResolucaoDAO implements ResolucaoRepository {
 
 	public List<Tipo> tiposPeloNome(String nome) {
 		ArrayList<Tipo> tipos = new ArrayList<Tipo>();
-		Document query = new Document("nome", Pattern.compile(nome));
-		FindIterable<Document> search = tipoCollection.find(query);
+		Document query = new Document("id", Pattern.compile(nome));
+		FindIterable<Document> search = resolucaoCollection.find(query);
 		for (Document tipoDocument : search){
+			System.out.println("Found Document: " + tipoDocument.toJson());
 			tipos.add(mds.fromDocument(tipoDocument, Tipo.class));
 		}
 		return tipos;

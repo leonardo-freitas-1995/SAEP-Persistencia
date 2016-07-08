@@ -6,6 +6,7 @@ import br.ufg.inf.saep.tools.MongoDocumentSerializer;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.bson.types.BasicBSONList;
 
 import java.util.ArrayList;
 
@@ -36,17 +37,17 @@ public class ParecerDAO implements ParecerRepository {
 	public void removeNota(String id, Avaliavel original) {
 		Document query = new Document("id", id);
 		Document avaliavelJSON = mds.toDocument(original, "Avaliavel");
-		ArrayList<Nota> newNotas = new ArrayList<Nota>();
+		BasicBSONList newNotas = new BasicBSONList();
 		Document parecerDocument = parecerCollection.find(query).first();
 		ArrayList<Document> notasDocument = (ArrayList<Document>) parecerDocument.get("notas");
 		for (Document notaDoc : notasDocument){
 			Nota nota = mds.fromDocument(notaDoc, Nota.class);
 			Document originalJSON = mds.toDocument(nota.getItemOriginal(), "Avaliavel");
 			if (!originalJSON.toJson().equals(avaliavelJSON.toJson())){
-				newNotas.add(nota);
+				newNotas.add(mds.toDocument(nota, "Nota"));
 			}
 		}
-		Document newNotasDocument = new Document("notas", mds.toDocument(newNotas, "Nota"));
+		Document newNotasDocument = new Document("notas", newNotas);
 		parecerCollection.updateOne(query, new Document("$set", newNotasDocument));
 	}
 
@@ -88,7 +89,7 @@ public class ParecerDAO implements ParecerRepository {
 		return mds.fromDocument(resolucaoDocument, Radoc.class);
 	}
 
-	public String persisteRadoc(Radoc radoc) {
+	public String persisteRadoc(Radoc radoc) throws IdentificadorExistente{
 		Document query = new Document("id", radoc.getId());
 		Document resolucaoDocument = radocCollection.find(query).first();
 		if (resolucaoDocument != null){
@@ -99,10 +100,10 @@ public class ParecerDAO implements ParecerRepository {
 		return radoc.getId();
 	}
 
-	public void removeRadoc(String identificador) {
-		Document query = new Document("radocs", identificador);
-		long findings = parecerCollection.count(query);
-		if (findings > 0){
+	public void removeRadoc(String identificador) throws RuntimeException {
+		Document query = new Document("id", identificador);
+		long findings = radocCollection.count(query);
+		if (findings == 0){
 			throw new RuntimeException();
 		}
 		radocCollection.deleteOne(new Document("id", identificador));
