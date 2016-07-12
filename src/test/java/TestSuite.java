@@ -16,7 +16,7 @@ public class TestSuite {
 
 	public static void persisteResolucao() throws IOException{
 
-		Regra regra = new Regra(0, "Esta é uma regra de teste", 50, 20, "carga", null, null, null, "aula", 2, null);
+		Regra regra = new Regra("aula", 0, "Esta é uma regra de teste", 50, 20, "carga", null, null, null, 2, null);
 		ArrayList<Regra> regras = new ArrayList<Regra>();
 		regras.add(regra);
 		String retorno = "";

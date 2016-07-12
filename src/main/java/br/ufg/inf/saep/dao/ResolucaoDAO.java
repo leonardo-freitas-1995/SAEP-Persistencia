@@ -42,7 +42,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		Document query = new Document("id", resolucao.getId());
 		Document resolucaoDocument = resolucaoCollection.find(query).first();
 		if (resolucaoDocument != null)
-			return null;
+			throw new IdentificadorExistente("id");
 
 		resolucaoCollection.insertOne(mds.toDocument(resolucao, "Resolucao"));
 		return resolucao.getId();

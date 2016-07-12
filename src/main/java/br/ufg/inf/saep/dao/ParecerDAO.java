@@ -27,11 +27,27 @@ public class ParecerDAO implements ParecerRepository {
 
 	public void adicionaNota(String id, Nota nota) {
 		Document query = new Document("id", id);
-		Document update = new Document("$push", new Document("notas", mds.toDocument(nota, "Nota")));
-		Document originalDoc = parecerCollection.findOneAndUpdate(query, update);
-		if (originalDoc == null){
+		Document notaDocument = new Document("notas", mds.toDocument(nota, "Nota"));
+		Document avaliavelJSON = mds.toDocument(nota.getItemOriginal(), "Avaliavel");
+		Document parecerDocument = parecerCollection.find(query).first();
+		if (parecerDocument == null){
 			throw new IdentificadorDesconhecido(id);
 		}
+		BasicBSONList newNotas = new BasicBSONList();
+		ArrayList<Document> notasDocument = (ArrayList<Document>) parecerDocument.get("notas");
+		for (Document notaDoc : notasDocument){
+			Nota notaParecer = mds.fromDocument(notaDoc, Nota.class);
+			Document originalJSON = mds.toDocument(notaParecer.getItemOriginal(), "Avaliavel");
+			if (!originalJSON.toJson().equals(avaliavelJSON.toJson())){
+				newNotas.add(mds.toDocument(notaParecer, "Nota"));
+			}
+			else{
+				newNotas.add(notaDocument);
+			}
+		}
+		Document newNotasDocument = new Document("notas", newNotas);
+		parecerCollection.updateOne(query, new Document("$set", newNotasDocument));
+
 	}
 
 	public void removeNota(String id, Avaliavel original) {
