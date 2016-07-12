@@ -66,6 +66,11 @@ public class ResolucaoDAO implements ResolucaoRepository {
 	}
 
 	public void persisteTipo(Tipo tipo) {
+		Document query = new Document("id", tipo.getId());
+		Document tipoDocument = tipoCollection.find(query).first();
+		if (tipoDocument != null)
+			throw new IdentificadorExistente("id");
+
 		tipoCollection.insertOne(mds.toDocument(tipo, "Tipo"));
 	}
 
@@ -89,9 +94,8 @@ public class ResolucaoDAO implements ResolucaoRepository {
 	public List<Tipo> tiposPeloNome(String nome) {
 		ArrayList<Tipo> tipos = new ArrayList<Tipo>();
 		Document query = new Document("id", Pattern.compile(nome));
-		FindIterable<Document> search = resolucaoCollection.find(query);
+		FindIterable<Document> search = tipoCollection.find(query);
 		for (Document tipoDocument : search){
-			System.out.println("Found Document: " + tipoDocument.toJson());
 			tipos.add(mds.fromDocument(tipoDocument, Tipo.class));
 		}
 		return tipos;
