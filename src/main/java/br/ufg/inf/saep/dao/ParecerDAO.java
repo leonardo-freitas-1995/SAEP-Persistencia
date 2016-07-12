@@ -118,10 +118,10 @@ public class ParecerDAO implements ParecerRepository {
 	}
 
 	public void removeRadoc(String identificador) throws RuntimeException {
-		Document query = new Document("id", identificador);
-		long findings = radocCollection.count(query);
-		if (findings == 0){
-			throw new RuntimeException();
+		Document query = new Document("radocs", identificador);
+		long findings = parecerCollection.count(query);
+		if (findings > 0){
+			throw new ExisteParecerReferenciandoRadoc(identificador);
 		}
 		radocCollection.deleteOne(new Document("id", identificador));
 	}
