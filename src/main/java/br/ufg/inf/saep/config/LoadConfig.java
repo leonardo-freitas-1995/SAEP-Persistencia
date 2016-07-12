@@ -10,20 +10,17 @@ import java.util.Properties;
  */
 public class LoadConfig {
 
-	private final Properties prop = new Properties();
-
-	public LoadConfig(String config) {
+	public static Properties loadFile(String config) {
 		InputStream input;
+		Properties prop = null;
 		try {
 			input = new FileInputStream("./" + config);
-			this.prop.load(input);
+			prop = new Properties();
+			prop.load(input);
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	public String getConfig(String config){
-		return this.prop.getProperty(config);
+		return prop;
 	}
 }

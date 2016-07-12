@@ -1,7 +1,6 @@
 package br.ufg.inf.saep.dao;
 
 import br.ufg.inf.es.saep.sandbox.dominio.*;
-import br.ufg.inf.saep.config.LoadConfig;
 import br.ufg.inf.saep.db.DBConnection;
 import br.ufg.inf.saep.tools.MongoDocumentSerializer;
 import com.mongodb.client.FindIterable;
@@ -11,14 +10,16 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Pattern;
 
 
 public class ResolucaoDAO implements ResolucaoRepository {
-	LoadConfig databaseConfig = new LoadConfig("database.properties");
-	private MongoDatabase db = DBConnection.getConnection().getDatabase();
-	private MongoCollection<Document> resolucaoCollection = db.getCollection(databaseConfig.getConfig("RESOLUCAO_COLLECTION"));
-	private MongoCollection<Document> tipoCollection = db.getCollection(databaseConfig.getConfig("TIPO_COLLECTION"));
+	private DBConnection connection = DBConnection.getConnection();
+	private MongoDatabase db = connection.getDatabase();
+	private Properties dbConfig = connection.getConfig();
+	private MongoCollection<Document> resolucaoCollection = db.getCollection(connection.getConfig().getProperty("RESOLUCAO_COLLECTION"));
+	private MongoCollection<Document> tipoCollection = db.getCollection(connection.getConfig().getProperty("TIPO_COLLECTION"));
 	private MongoDocumentSerializer mds = new MongoDocumentSerializer();
 
 	public ResolucaoDAO(){
