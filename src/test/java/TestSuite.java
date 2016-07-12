@@ -307,8 +307,8 @@ public class TestSuite {
 	}
 
 	public static void main(String[] args) throws IOException {
-		System.out.println("Iniciando a suite de teste da API de persistência do SAEP, implementando pelo aluno Leonardo Freitas dos Santos");
-		System.out.println("Antes de inicar cada teste, é preciso apertar enter, deste modo, é possível pausar entre cada teste e verificar o estado do banco (Usando MongoShell, Robomongo, etc)");
+		System.out.println("Iniciando a suite de teste d ecampo da API de persistência do SAEP, implementando pelo aluno Leonardo Freitas dos Santos");
+		System.out.println("Antes de iniciar cada teste, é preciso apertar enter, deste modo, é possível pausar entre cada teste e verificar o estado do banco (Usando MongoShell, Robomongo, etc)");
 		db.drop();
 		System.out.println("Drop na database realizado. Host: localhost:27017 - Banco: saep");
 		persisteResolucao();
