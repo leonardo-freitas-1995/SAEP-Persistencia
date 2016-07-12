@@ -93,7 +93,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 
 	public List<Tipo> tiposPeloNome(String nome) {
 		ArrayList<Tipo> tipos = new ArrayList<Tipo>();
-		Document query = new Document("id", Pattern.compile(nome));
+		Document query = new Document("nome", Pattern.compile(nome));
 		FindIterable<Document> search = tipoCollection.find(query);
 		for (Document tipoDocument : search){
 			tipos.add(mds.fromDocument(tipoDocument, Tipo.class));
