@@ -1,6 +1,7 @@
 package br.ufg.inf.saep.dao;
 
 import br.ufg.inf.es.saep.sandbox.dominio.*;
+import br.ufg.inf.saep.config.DBConfig;
 import br.ufg.inf.saep.db.DBConnection;
 import br.ufg.inf.saep.tools.MongoDocumentSerializer;
 import com.mongodb.client.MongoCollection;
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 public class ParecerDAO implements ParecerRepository {
 	private static ParecerDAO instance = new ParecerDAO();
 	private MongoDatabase db = DBConnection.getConnection().getDatabase();
-	private MongoCollection<Document> radocCollection = db.getCollection("radocs");
-	private MongoCollection<Document> parecerCollection = db.getCollection("pareceres");
+	private MongoCollection<Document> radocCollection = db.getCollection(DBConfig.RADOC_COLLECTION);
+	private MongoCollection<Document> parecerCollection = db.getCollection(DBConfig.PARECER_COLLECTION);
 	private MongoDocumentSerializer mds = new MongoDocumentSerializer();
 
 	public static ParecerDAO getInstance() {
