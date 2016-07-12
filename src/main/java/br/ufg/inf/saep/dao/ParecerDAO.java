@@ -13,17 +13,13 @@ import java.util.ArrayList;
 
 
 public class ParecerDAO implements ParecerRepository {
-	private static ParecerDAO instance = new ParecerDAO();
 	private MongoDatabase db = DBConnection.getConnection().getDatabase();
 	private MongoCollection<Document> radocCollection = db.getCollection(DBConfig.RADOC_COLLECTION);
 	private MongoCollection<Document> parecerCollection = db.getCollection(DBConfig.PARECER_COLLECTION);
 	private MongoDocumentSerializer mds = new MongoDocumentSerializer();
 
-	public static ParecerDAO getInstance() {
-		return instance;
-	}
+	public ParecerDAO(){
 
-	private ParecerDAO() {
 	}
 
 	public void adicionaNota(String id, Nota nota) {

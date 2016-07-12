@@ -15,17 +15,13 @@ import java.util.regex.Pattern;
 
 
 public class ResolucaoDAO implements ResolucaoRepository {
-	private static ResolucaoDAO instance = new ResolucaoDAO();
 	private MongoDatabase db = DBConnection.getConnection().getDatabase();
 	private MongoCollection<Document> resolucaoCollection = db.getCollection(DBConfig.RESOLUCAO_COLLECTION);
 	private MongoCollection<Document> tipoCollection = db.getCollection(DBConfig.TIPO_COLLECTION);
 	private MongoDocumentSerializer mds = new MongoDocumentSerializer();
 
-	public static ResolucaoDAO getInstance() {
-		return instance;
-	}
+	public ResolucaoDAO(){
 
-	private ResolucaoDAO() {
 	}
 
 	public Resolucao byId(String id) {

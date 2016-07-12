@@ -12,8 +12,8 @@ public class ManualTestSuite {
 
 	static Scanner sc = new Scanner(System.in);
 	static MongoDatabase db = DBConnection.getConnection().getDatabase();
-	static ParecerDAO parecerDao = ParecerDAO.getInstance();
-	static ResolucaoDAO resolucaoDao = ResolucaoDAO.getInstance();
+	static ParecerDAO parecerDao = new ParecerDAO();
+	static ResolucaoDAO resolucaoDao = new ResolucaoDAO();
 
 	public static void persisteResolucao() throws IOException{
 

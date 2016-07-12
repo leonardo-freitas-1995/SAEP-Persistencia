@@ -23,8 +23,8 @@ public class TestSuite {
 		db.drop();
 
 		// Inicializando DAOs
-		resolucaoDao = ResolucaoDAO.getInstance();
-		parecerDao = ParecerDAO.getInstance();
+		resolucaoDao = new ResolucaoDAO();
+		parecerDao = new ParecerDAO();
 	}
 
 
