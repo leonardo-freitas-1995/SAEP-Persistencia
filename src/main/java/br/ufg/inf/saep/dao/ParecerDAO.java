@@ -28,7 +28,7 @@ public class ParecerDAO implements ParecerRepository {
 
 	public void adicionaNota(String id, Nota nota) {
 		Document query = new Document("id", id);
-		Document notaDocument = new Document("notas", mds.toDocument(nota, "Nota"));
+		Document notaDocument = mds.toDocument(nota, "Nota");
 		Document avaliavelJSON = mds.toDocument(nota.getItemOriginal(), "Avaliavel");
 		Document parecerDocument = parecerCollection.find(query).first();
 		if (parecerDocument == null){
@@ -36,6 +36,7 @@ public class ParecerDAO implements ParecerRepository {
 		}
 		BasicBSONList newNotas = new BasicBSONList();
 		ArrayList<Document> notasDocument = (ArrayList<Document>) parecerDocument.get("notas");
+		boolean inserted = false;
 		for (Document notaDoc : notasDocument){
 			Nota notaParecer = mds.fromDocument(notaDoc, Nota.class);
 			Document originalJSON = mds.toDocument(notaParecer.getItemOriginal(), "Avaliavel");
@@ -44,11 +45,14 @@ public class ParecerDAO implements ParecerRepository {
 			}
 			else{
 				newNotas.add(notaDocument);
+				inserted = true;
 			}
+		}
+		if (!inserted){
+			newNotas.add(notaDocument);
 		}
 		Document newNotasDocument = new Document("notas", newNotas);
 		parecerCollection.updateOne(query, new Document("$set", newNotasDocument));
-
 	}
 
 	public void removeNota(String id, Avaliavel original) {
