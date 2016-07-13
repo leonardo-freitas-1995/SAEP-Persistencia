@@ -13,6 +13,7 @@ import java.util.Properties;
  * Oferece um ponto unico de conexão na execução da API.
  *
  * @see MongoDatabase
+ * @see MongoClient
  */
 public class DBConnection {
 

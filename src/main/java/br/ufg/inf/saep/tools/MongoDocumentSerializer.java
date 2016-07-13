@@ -19,6 +19,7 @@ import java.lang.String;
  * Utiliza Gson para transformar os objetos.
  *
  * @see Gson
+ * @see BasicBSONList
  * @see Document
  */
 public class MongoDocumentSerializer {
