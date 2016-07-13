@@ -15,15 +15,29 @@ import java.util.ArrayList;
 import java.lang.String;
 
 /**
- * Created by Leonardo on 07/07/2016.
+ * Classe de parse e unparse entre Objects e Documents JSON.
+ * Utiliza Gson para transformar os objetos.
+ *
+ * @see Gson
+ * @see Document
  */
 public class MongoDocumentSerializer {
+
+	/**
+	 * Instancia do Gson para transformar objetos em String JSON.
+	 */
 	private final Gson gson = new Gson();
 
-	public MongoDocumentSerializer() {
-		this.getClass().getName();
-	}
+	/**
+	 * Construtor padrão de MongoDocumentSerializer
+	 */
+	public MongoDocumentSerializer() {}
 
+	/**
+	 * Parser de Array de Objets para uma Array de Documents
+	 * @param arr ArrayList de Objects a serem pareseados. Este objeto não é modificado.
+	 * @return A ArrayList de {@code Document} no padrão JSON.
+	 */
 	private ArrayList<Document> parseArray(ArrayList<Object> arr){
 		ArrayList<Document> newArr = new ArrayList<Document>();
 		for (Object o : arr){
@@ -32,14 +46,31 @@ public class MongoDocumentSerializer {
 		return newArr;
 	}
 
+	/**
+	 * Serializador default de Objects para Document
+	 * @param o Objeto a ser serializado.
+	 * @return O {@code Document} gerado do objeto de parametro.
+	 */
 	private Document toDocumentDefault(Object o){
 		return Document.parse(gson.toJson(o));
 	}
 
+	/**
+	 * Deserializador default de Document para Objects
+	 * @param document Document a ser deserializado.
+	 * @param classOfT Classe do TypeToken.
+	 * @param <T> TypeToken da Classe do Objeto que será instanciado com o JSON fornecido.
+	 * @return O Objeto deserializado de acordo com o {@code Document} JSON e o TypeToken informado.
+	 */
 	private <T> T fromDocumentDefault(Document document, Class<T> classOfT){
 		return gson.fromJson(document.toJson(), classOfT);
 	}
 
+	/**
+	 * Estratégia especifica de serialização para {@code Nota}
+	 * @param o O objeto Nota
+	 * @return O {@code Document} gerado na serialização.
+	 */
 	private Document toDocumentNota(Object o){
 		Nota nota = (Nota) o;
 		Document originalDoc = Document.parse(gson.toJson(nota.getItemOriginal()))
@@ -51,6 +82,13 @@ public class MongoDocumentSerializer {
 				.append("justificativa", nota.getJustificativa());
 	}
 
+	/**
+	 * Estratégia especifica de deserialização para {@code Nota}
+	 * @param document Document com JSON da Nota.
+	 *  @param classOfT Classe de Nota
+	 * @param <T> TypeToken da Classe Nota
+	 * @return O objeto Nota (Sem cast explicito) resultado da deserialização.
+	 */
 	private <T> T fromDocumentNota(Document document, Class<T> classOfT){
 		String justificativa = document.getString("justificativa");
 		Document originalDoc = (Document) document.get("original");
@@ -64,6 +102,11 @@ public class MongoDocumentSerializer {
 		}
 	}
 
+	/**
+	 * Estratégia especifica de serialização para {@code Parecer}
+	 * @param o O objeto Parecer
+	 * @return O {@code Document} gerado na serialização.
+	 */
 	private Document toDocumentParecer(Object o){
 		Parecer parecer = (Parecer) o;
 		BasicBSONList radocs = new BasicBSONList();
@@ -87,6 +130,13 @@ public class MongoDocumentSerializer {
 		return parecerDoc;
 	}
 
+	/**
+	 * Estratégia especifica de deserialização para {@code Parecer}
+	 * @param document Document com JSON da Parecer.
+	 *  @param classOfT Classe de Parecer
+	 * @param <T> TypeToken da Classe Parecer
+	 * @return O objeto Parecer (Sem cast explicito) resultado da deserialização.
+	 */
 	private <T> T fromDocumentParecer(Document document, Class<T> classOfT){
 		String id = document.getString("id");
 		String resolucao = document.getString("resolucao");
@@ -105,6 +155,11 @@ public class MongoDocumentSerializer {
 		return Primitives.wrap(classOfT).cast(new Parecer(id, resolucao, radocs, pontuacoes, fundamentacao, notas));
 	}
 
+	/**
+	 * Estratégia publica de serialização, que irá esolher entre a estratégia default ou uma estratégia específica.
+	 * @param o O objeto a ser serializado.
+	 * @return O {@code Document} gerado na serialização.
+	 */
 	public Document toDocument(Object o, String className){
 		Method[] allMethods = this.getClass().getDeclaredMethods();
 		for (Method m : allMethods) {
@@ -121,6 +176,13 @@ public class MongoDocumentSerializer {
 		return toDocumentDefault(o);
 	}
 
+	/**
+	 * Estratégia publica de deserialização, que irá esolher entre a estratégia default ou uma estratégia específica.
+	 * @param document Document a ser deserializado.
+	 * @param classOfT Classe do TypeToken.
+	 * @param <T> TypeToken da Classe do Objeto que será instanciado com o JSON fornecido.
+	 * @return O Objeto deserializado de acordo com o {@code Document} JSON e o TypeToken informado.
+	 */
 	public <T> T fromDocument(Document document, Class<T> classOfT){
 		Method[] allMethods = this.getClass().getDeclaredMethods();
 		for (Method m : allMethods) {
