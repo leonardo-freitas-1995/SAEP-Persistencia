@@ -33,6 +33,7 @@ public class ParecerDAO implements ParecerRepository {
 		if (parecerDocument == null){
 			throw new IdentificadorDesconhecido(id);
 		}
+
 		BasicBSONList newNotas = new BasicBSONList();
 		ArrayList<Document> notasDocument = (ArrayList<Document>) parecerDocument.get("notas");
 		boolean inserted = false;
@@ -47,9 +48,11 @@ public class ParecerDAO implements ParecerRepository {
 				inserted = true;
 			}
 		}
+
 		if (!inserted){
 			newNotas.add(notaDocument);
 		}
+
 		Document newNotasDocument = new Document("notas", newNotas);
 		parecerCollection.updateOne(query, new Document("$set", newNotasDocument));
 	}
@@ -67,6 +70,7 @@ public class ParecerDAO implements ParecerRepository {
 				newNotas.add(mds.toDocument(nota, "Nota"));
 			}
 		}
+
 		Document newNotasDocument = new Document("notas", newNotas);
 		parecerCollection.updateOne(query, new Document("$set", newNotasDocument));
 	}
@@ -76,6 +80,7 @@ public class ParecerDAO implements ParecerRepository {
 		if (findings > 0){
 			throw new IdentificadorExistente("id");
 		}
+
 		parecerCollection.insertOne(mds.toDocument(parecer, "Parecer"));
 	}
 
@@ -91,8 +96,9 @@ public class ParecerDAO implements ParecerRepository {
 	public Parecer byId(String id) {
 		Document query = new Document("id", id);
 		Document parecerDocument = parecerCollection.find(query).first();
-		if (parecerDocument == null)
+		if (parecerDocument == null){
 			return null;
+		}
 
 		return mds.fromDocument(parecerDocument, Parecer.class);
 	}
@@ -104,8 +110,10 @@ public class ParecerDAO implements ParecerRepository {
 	public Radoc radocById(String identificador) {
 		Document query = new Document("id", identificador);
 		Document resolucaoDocument = radocCollection.find(query).first();
-		if (resolucaoDocument == null)
+		if (resolucaoDocument == null) {
 			return null;
+		}
+
 		return mds.fromDocument(resolucaoDocument, Radoc.class);
 	}
 
@@ -126,6 +134,7 @@ public class ParecerDAO implements ParecerRepository {
 		if (findings > 0){
 			throw new ExisteParecerReferenciandoRadoc(identificador);
 		}
+
 		radocCollection.deleteOne(new Document("id", identificador));
 	}
 }

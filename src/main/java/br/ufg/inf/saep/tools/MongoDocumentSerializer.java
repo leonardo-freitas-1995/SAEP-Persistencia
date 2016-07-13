@@ -43,6 +43,7 @@ public class MongoDocumentSerializer {
 		for (Object o : arr){
 			newArr.add(this.toDocumentDefault(o));
 		}
+
 		return newArr;
 	}
 
@@ -113,10 +114,12 @@ public class MongoDocumentSerializer {
 		for (String radoc : parecer.getRadocs()){
 			radocs.add(radoc);
 		}
+
 		BasicBSONList pontuacoes = new BasicBSONList();
 		for (Pontuacao pontuacao : parecer.getPontuacoes()){
 			pontuacoes.add(this.toDocumentDefault(pontuacao));
 		}
+
 		Document parecerDoc = new Document("id", parecer.getId())
 									.append("resolucao", parecer.getResolucao())
 									.append("radocs", radocs)
@@ -126,6 +129,7 @@ public class MongoDocumentSerializer {
 		for (Nota nota : parecer.getNotas()){
 			notas.add(this.toDocumentNota(nota));
 		}
+
 		parecerDoc.append("notas", notas);
 		return parecerDoc;
 	}
@@ -147,11 +151,13 @@ public class MongoDocumentSerializer {
 		for (Document pontuacaoDoc : pontuacoesDoc){
 			pontuacoes.add(this.fromDocumentDefault(pontuacaoDoc, Pontuacao.class));
 		}
+
 		ArrayList<Document> notasDoc = (ArrayList<Document>) document.get("notas");
 		ArrayList<Nota> notas = new ArrayList<Nota>();
 		for (Document notaDoc : notasDoc){
 			notas.add(this.fromDocumentNota(notaDoc, Nota.class));
 		}
+
 		return Primitives.wrap(classOfT).cast(new Parecer(id, resolucao, radocs, pontuacoes, fundamentacao, notas));
 	}
 
@@ -173,6 +179,7 @@ public class MongoDocumentSerializer {
 				}
 			}
 		}
+
 		return toDocumentDefault(o);
 	}
 
@@ -196,6 +203,7 @@ public class MongoDocumentSerializer {
 				}
 			}
 		}
+
 		return fromDocumentDefault(document, classOfT);
 	}
 }

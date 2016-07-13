@@ -29,19 +29,23 @@ public class ResolucaoDAO implements ResolucaoRepository {
 	public Resolucao byId(String id) {
 		Document query = new Document("id", id);
 		Document resolucaoDocument = resolucaoCollection.find(query).first();
-		if (resolucaoDocument == null)
+		if (resolucaoDocument == null) {
 			return null;
+		}
+
 		return mds.fromDocument(resolucaoDocument, Resolucao.class);
 	}
 
 	public String persiste(Resolucao resolucao) {
-		if (resolucao.getId() == null)
+		if (resolucao.getId() == null) {
 			throw new CampoExigidoNaoFornecido("id");
+		}
 
 		Document query = new Document("id", resolucao.getId());
 		Document resolucaoDocument = resolucaoCollection.find(query).first();
-		if (resolucaoDocument != null)
+		if (resolucaoDocument != null) {
 			throw new IdentificadorExistente("id");
+		}
 
 		resolucaoCollection.insertOne(mds.toDocument(resolucao, "Resolucao"));
 		return resolucao.getId();
@@ -51,7 +55,6 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		Document query = new Document("id", identificador);
 		Document resolucaoDocument = resolucaoCollection.findOneAndDelete(query);
 		return resolucaoDocument != null;
-
 	}
 
 	public List<String> resolucoes() {
@@ -60,14 +63,16 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		for (Document resolucao : search){
 			ids.add(resolucao.getString("id"));
 		}
+
 		return ids;
 	}
 
 	public void persisteTipo(Tipo tipo) {
 		Document query = new Document("id", tipo.getId());
 		Document tipoDocument = tipoCollection.find(query).first();
-		if (tipoDocument != null)
+		if (tipoDocument != null) {
 			throw new IdentificadorExistente("id");
+		}
 
 		tipoCollection.insertOne(mds.toDocument(tipo, "Tipo"));
 	}
@@ -78,14 +83,17 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		if (findings > 0){
 			throw new ResolucaoUsaTipoException(codigo);
 		}
+
 		tipoCollection.deleteOne(new Document("id", codigo));
 	}
 
 	public Tipo tipoPeloCodigo(String codigo) {
 		Document query = new Document("id", codigo);
 		Document tipoDocument = tipoCollection.find(query).first();
-		if (tipoDocument == null)
+		if (tipoDocument == null) {
 			return null;
+		}
+
 		return mds.fromDocument(tipoDocument, Tipo.class);
 	}
 
@@ -96,6 +104,7 @@ public class ResolucaoDAO implements ResolucaoRepository {
 		for (Document tipoDocument : search){
 			tipos.add(mds.fromDocument(tipoDocument, Tipo.class));
 		}
+
 		return tipos;
 	}
 

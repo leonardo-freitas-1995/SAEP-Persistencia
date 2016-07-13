@@ -29,6 +29,7 @@ public class LoadConfig {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+
 		return prop;
 	}
 }
