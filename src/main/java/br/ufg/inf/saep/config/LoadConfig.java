@@ -6,10 +6,18 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Created by Leonardo on 12/07/2016.
+ * Carrega em tempo de execução um arquivo e expoe suas propriedades para uso
+ *
+ * @see Properties
  */
 public class LoadConfig {
 
+	/**
+	 * Carrega um arquivo de propriedades contendo configurações.
+	 *
+	 * @param config Nome do arquivo de configuração, que se encontra na pasta raiz do projeto.
+	 * @return O {@code Properties} do arquivo na localização informada. Retorna null caso não encontre o arquivo.
+	 */
 	public static Properties loadFile(String config) {
 		InputStream input;
 		Properties prop = null;
